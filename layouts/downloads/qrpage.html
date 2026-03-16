@@ -1,0 +1,56 @@
+{{/*
+  layouts/downloads/qrpage.html — 二维码展示页
+
+  使用 Hugo 0.136+ 内建 {{< qr >}} shortcode 生成 SVG 二维码，
+  Bulma columns is-centered is-multiline 居中排列多张卡片。
+
+  将 .Content 按 <hr> 切分，每段包进一个 Bulma column。
+
+  Markdown 正文格式（无需 front matter 数据）：
+
+    ## 标题
+    {{< qr text="https://..." level="M" scale=6 targetDir="qrcodes" class="qr-svg" >}}
+    描述文字（可选段落）
+    ---
+    ## 下一个标题
+    {{< qr text="https://..." ... >}}
+    ...
+
+  front matter 只需：
+    title   页面标题（必填）
+    layout  "qrpage"（必填）
+*/}}
+{{ define "main" }}
+
+<section class="hero is-dark">
+  <div class="hero-body has-text-centered">
+    <p class="qr-hero-label">Scan to Download</p>
+    <h1 class="title is-3">{{ .Title }}</h1>
+  </div>
+</section>
+
+{{/* 按 <hr> 切分内容，每段包成一张卡片 */}}
+{{ $sections := .Content | split "<hr>" }}
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline is-centered">
+
+      {{ range $sections }}
+        {{ $block := . | strings.TrimSpace }}
+        {{ if $block }}
+        <div class="column is-narrow">
+          <div class="card qr-card has-text-centered">
+            <div class="card-content">
+              {{ $block | safeHTML }}
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      {{ end }}
+
+    </div>
+  </div>
+</section>
+
+{{ end }}

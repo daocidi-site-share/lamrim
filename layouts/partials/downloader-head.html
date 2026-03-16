@@ -1,0 +1,14 @@
+{{/* 仅 layout = "downloader" 时注入资源，避免影响其他页面
+     脚本加载顺序（必须）：
+       1. downloader-i18n.js   定义 window.DLI18n
+       2. downloader.js        使用 DLI18n，暴露 window.__dlInit
+       3. downloader-parser.js 解析 Markdown HTML，调用 __dlInit       */}}
+{{ if eq .Layout "downloader" }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+<link rel="stylesheet" href="{{ "css/downloader.css" | relURL }}">
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script src="{{ "js/downloader-i18n.js"  | relURL }}" defer></script>
+<script src="{{ "js/downloader.js"        | relURL }}" defer></script>
+<script src="{{ "js/downloader-parser.js" | relURL }}" defer></script>
+{{ end }}

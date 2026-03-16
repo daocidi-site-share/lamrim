@@ -1,0 +1,24 @@
+{{/*
+  layouts/downloads/downloader.html — 下载页
+
+  front matter 字段：
+    title     页面标题（必填）
+    layout    "downloader"（必填）
+    zip_name  打包 ZIP 文件名（可选，默认 files.zip）
+    unit      字节换算进制：1024（默认）或 1000（可选）
+    lang      界面语言：zh-CN / zh-TW / en（可选，默认跟随 <html lang>）
+*/}}
+{{ define "main" }}
+  <meta name="dl-title"   content="{{ .Title }}">
+  <meta name="dl-zipname" content="{{ .Params.zip_name | default "files.zip" }}">
+  {{- with .Params.unit }}<meta name="dl-unit" content="{{ . }}">{{ end }}
+  {{- with .Params.lang }}<meta name="dl-lang" content="{{ . }}">{{ end }}
+
+  {{/* Markdown 正文（隐藏），downloader-parser.js 从中解析文件列表 */}}
+  <div id="dl-content" style="display:none">
+    {{ .Content }}
+  </div>
+
+  {{/* 渲染目标，downloader.js 在此生成完整 UI */}}
+  <div id="dl-root"></div>
+{{ end }}

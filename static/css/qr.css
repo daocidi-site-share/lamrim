@@ -1,0 +1,77 @@
+/* ============================================================
+   qr.css — 二维码展示页补充样式（布局由 Bulma 负责）
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap');
+
+:root {
+  --qr-accent:  #00b4d8;
+  --qr-ink:     #1b2533;
+  --qr-muted:   #8896a7;
+  --qr-bg:      #f4f7fb;
+  --qr-border:  #dde3ea;
+  --qr-mono:    'DM Mono', monospace;
+  --qr-display: 'Syne', sans-serif;
+}
+
+/* ── Hero 补充 ── */
+.hero.is-dark {
+  background: linear-gradient(135deg, var(--qr-ink) 0%, #263549 100%) !important;
+  position: relative; overflow: hidden;
+}
+.hero.is-dark::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(0,180,216,.18) 0%, transparent 55%),
+    radial-gradient(circle at 10% 80%, rgba(0,119,182,.15) 0%, transparent 50%);
+}
+.qr-hero-label {
+  font-family: var(--qr-mono);
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--qr-accent); margin-bottom: .4rem;
+  position: relative;
+}
+.hero .title { position: relative; }
+
+/* ── 卡片补充 ── */
+.qr-card {
+  width: 240px;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,.07) !important;
+  animation: qr-rise .35s ease both;
+}
+.qr-card:nth-child(1) { animation-delay: .04s; }
+.qr-card:nth-child(2) { animation-delay: .10s; }
+.qr-card:nth-child(3) { animation-delay: .16s; }
+.qr-card:nth-child(4) { animation-delay: .22s; }
+.qr-card:nth-child(5) { animation-delay: .28s; }
+.qr-card:nth-child(6) { animation-delay: .34s; }
+@keyframes qr-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hugo qr shortcode 输出的 <img> */
+.qr-svg {
+  display: block;
+  width: 180px; height: 180px;
+  margin: 0 auto;
+  border-radius: 8px;
+  border: 5px solid var(--qr-bg);
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+/* 卡片内 <h2>（来自 ##） */
+.qr-card .card-content h2 {
+  font-family: var(--qr-display);
+  font-size: 1rem; font-weight: 700;
+  color: var(--qr-ink);
+  margin: .9rem 0 0;
+}
+
+/* 卡片内 <p>（描述） */
+.qr-card .card-content p {
+  font-family: var(--qr-display);
+  font-size: .74rem; color: var(--qr-muted);
+  margin: .3rem 0 0; line-height: 1.5;
+}
