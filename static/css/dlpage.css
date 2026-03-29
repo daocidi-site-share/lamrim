@@ -119,6 +119,10 @@ body       { font-family: var(--dl-display) !important; }
 .dl-type-img { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
 .dl-type-map { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
 
+.dl-type-mp4 { background: #e0f7fa; color: #00838f; border: #80deea solid 1px; }
+.dl-type-docx .dl-type-doc { background: #e1f5fe; color: #0277bd; border: #81d4fa solid 1px; }
+.dl-type-mp3 { background: #ede7f6; color: #4527a0; border: #b39ddb solid 1px; }
+
 .dl-file-info  { flex: 1; min-width: 0; }
 .dl-file-name  {
   font-family: var(--dl-mono); font-size: .78rem; font-weight: 500; color: var(--dl-ink);
